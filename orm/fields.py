@@ -60,6 +60,12 @@ class String(ModelField):
     def get_column_type(self):
         return sqlalchemy.String(length=self.validator.max_length)
 
+class ByteArray(ModelField):
+    def get_validator(self, **kwargs) -> typesystem.Field:
+        return typesystem.Object(**kwargs)
+
+    def get_column_type(self):
+        return sqlalchemy.LargeBinary()
 
 class Text(ModelField):
     def get_validator(self, **kwargs) -> typesystem.Field:
